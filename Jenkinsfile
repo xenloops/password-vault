@@ -17,6 +17,8 @@ pipeline {
                     -f "ALL" 
                     --prettyPrint''', odcInstallation: 'Dependency-Check'
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+            }
+        }
         stage('SAST') {
             environment {
                 SCANNER_HOME = tool 'SonarQube Scanner'
