@@ -4,17 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo '***************************'
                 echo '*** Building the project...'
-                echo '***************************'
-              sh 'ant compile jar'
+                sh 'ant compile jar'
             }
         }
         stage ('SCA') {
             steps {
-                echo '***************************'
                 echo '*** Checking dependencies...'
-                echo '***************************'
                 dependencyCheck additionalArguments: ''' 
                     -o "./" 
                     -s "./"
@@ -22,10 +18,26 @@ pipeline {
                     --prettyPrint''', odcInstallation: 'Dependency-Check'
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
         stage('SAST') {
+            environment {
+                SCANNER_HOME = tool 'SonarQube Scanner'
+                PROJECT_KEY = 'password-vault'
+                PROJECT_NAME = 'Java project analyzed by SonarQube'
+            }
             steps {
-                echo '************************'
-                echo '*** Running SonarQube...'
-                echo '************************'
+                echo '*** Scanning the code...'
+                // test command here
+                withSonarQubeEnv('SonarQube server') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.projectKey=$PROJECT_KEY \
+                    -Dsonar.projectName=$PROJECT_NAME \
+                    -Dsonar.projectVersion=1.0 \
+                    -Dsonar.sources=src \
+                    -Dsonar.language=java \
+                    -Dsonar.sourceEncoding=UTF-8 \
+                    -Dsonar.java.binaries=build/classes/passvault \
+                    -Dsonar.java.libraries=dist/lib
+                    '''
+                }
             }
         }
     }
