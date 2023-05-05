@@ -15,7 +15,7 @@ pipeline {
                     -o "./" 
                     -s "./"
                     -f "ALL" 
-                    --prettyPrint''', odcInstallation: 'Dependency-Check'
+                    --prettyPrint''', odcInstallation: 'SCA: Dependency-Check'
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
@@ -23,7 +23,6 @@ pipeline {
             environment {
                 SCANNER_HOME = tool 'SonarQube Scanner'
                 PROJECT_KEY = 'password-vault'
-                PROJECT_NAME = 'Java project analyzed by SonarQube'
             }
             steps {
                 echo '*** Scanning the code...'
@@ -31,7 +30,7 @@ pipeline {
                 withSonarQubeEnv('SonarQube server') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
                     -Dsonar.projectKey=$PROJECT_KEY \
-                    -Dsonar.projectName=$PROJECT_NAME \
+                    -Dsonar.projectName='Project analyzed by SonarQube' \
                     -Dsonar.projectVersion=1.0 \
                     -Dsonar.sources=src \
                     -Dsonar.language=java \
