@@ -12,8 +12,8 @@ pipeline {
             steps {
                 echo '*** Checking dependencies...'
                 dependencyCheck additionalArguments: ''' 
-                    -o "./" 
-                    -s "./"
+                    -o "build/classes/passvault" 
+                    -s "src/passvault"
                     -f "ALL" 
                     --prettyPrint''', odcInstallation: 'SCA: Dependency-Check'
                 dependencyCheckPublisher pattern: 'dependency-check-report.xml'
