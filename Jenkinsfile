@@ -6,7 +6,9 @@ pipeline {
             steps {
                 echo '*** Building the project...'
                 sh 'ant compile jar'
-                sh 'cyclonedx generate-bom --output password-vault-SBOM.xml'
+                // Generate SBOM
+                //sh 'cyclonedx generate-bom --output password-vault-SBOM.xml'
+                sh 'cdxgen -r -o password-vault-SBOM.json'
             }
         }
         stage ('SCA') {
