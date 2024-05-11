@@ -10,8 +10,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo '*** Building the project...'
-                //works sh 'ant compile jar'
-                sh 'ant clean compile'
+                works sh 'ant compile jar'
+                //sh 'ant clean compile'
             }
         }
         stage('SBOM') {
