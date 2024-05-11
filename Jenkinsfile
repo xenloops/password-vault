@@ -22,8 +22,8 @@ pipeline {
                 //sh 'pwd'
                 //sh 'ls -l'
                 script {
-                    def cycloneDxHome = tool 'CycloneDX'
-                    sh "${cycloneDxHome}/cyclonedx-cli generate-bom --output bom.xml"
+                    //def cycloneDxHome = tool 'CycloneDX'
+                    //sh "${cycloneDxHome}/cyclonedx-cli generate-bom --output bom.xml"
                 }
             }
         }
