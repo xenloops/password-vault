@@ -14,19 +14,19 @@ pipeline {
                 //sh 'ant clean compile'
             }
         }
-        stage('SBOM') {
-            steps {
+//        stage('SBOM') {
+//            steps {
                 //sh 'cyclonedx generate-bom --output password-vault-SBOM.xml'
                 //sh 'cdxgen -o password-vault-SBOM.json'
                 //sh 'mvn org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom'
                 //sh 'pwd'
                 //sh 'ls -l'
-                script {
+//                script {
                     //def cycloneDxHome = tool 'CycloneDX'
                     //sh "${cycloneDxHome}/cyclonedx-cli generate-bom --output bom.xml"
-                }
-            }
-        }
+//                }
+//            }
+//        }
         stage ('SCA') {
             steps {
                 echo '*** Checking dependencies...'
