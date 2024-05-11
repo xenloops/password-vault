@@ -8,7 +8,8 @@ pipeline {
                 sh 'ant compile jar'
                 // Generate SBOM
                 //sh 'cyclonedx generate-bom --output password-vault-SBOM.xml'
-                sh 'cdxgen -o password-vault-SBOM.json'
+                //sh 'cdxgen -o password-vault-SBOM.json'
+                sh 'mvn org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom'
             }
         }
         stage ('SCA') {
