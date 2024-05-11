@@ -16,8 +16,8 @@ pipeline {
         }
         stage('SBOM') {
             steps {
-                sh 'cyclonedx generate-bom --output password-vault-SBOM.xml'
-                //sh 'cdxgen -o password-vault-SBOM.json'
+                //sh 'cyclonedx generate-bom --output password-vault-SBOM.xml'
+                sh 'cdxgen bom --build-dir build --output-file password-vault-SBOM.xml'
                 //sh 'mvn org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom'
                 //sh 'pwd'
                 //sh 'ls -l'
