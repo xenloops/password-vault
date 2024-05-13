@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+        // did this in Jenkins
 //        stage('Clone') {
 //            steps {
 //                git 'https://github.com/xenloops/password-vault'
