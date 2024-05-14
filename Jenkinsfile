@@ -20,7 +20,13 @@ pipeline {
                 sh 'ant compile jar'  //works
                 //sh 'ant clean compile'
                 // Super secret service account creds:
-                withCredentials([usernamePassword(credentialsId: 'test_service_account', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials(
+                    [usernamePassword(
+                        credentialsId: 'test_service_account', 
+                        usernameVariable: 'USERNAME', 
+                        passwordVariable: 'PASSWORD')
+                    ]) 
+                {
                     sh 'echo "Username: $USERNAME"'
                     sh 'echo "Password: $PASSWORD"'
                 }
