@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent any
 
     //environment {
@@ -20,6 +20,7 @@ pipeline {
                 sh 'ant compile jar'  //works
                 //sh 'ant clean compile'
                 // Super secret service account creds:
+                echo '*** These credentials stored securely in Jenkins ***'
                 withCredentials(
                     [usernamePassword(
                         credentialsId: 'test_service_account', 
