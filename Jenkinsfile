@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    environment {
+    //environment {
         // Grab service account DB login from Jenkins secret storage
         //USERNAME = credentials('test_service_account').username
         //PASSWORD = credentials('test_service_account').password
-    }
+    //}
 
     stages {
         // did this in Jenkins
@@ -21,8 +21,9 @@ pipeline {
                 //sh 'ant clean compile'
                 // Super secret service account creds:
                 withCredentials([usernamePassword(credentialsId: 'test_service_account', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                sh 'echo "Username: $USERNAME"'
-                sh 'echo "Password: $PASSWORD"'
+                    sh 'echo "Username: $USERNAME"'
+                    sh 'echo "Password: $PASSWORD"'
+                }
             }
         }
         stage('SBOM') {
