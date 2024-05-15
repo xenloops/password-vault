@@ -33,11 +33,11 @@
                     sh 'echo "Password: $PASSWORD"'
                 }
                 echo '*** Generating hash ***'
-             sh 'ls -l build/classes/passvault'
-             sh 'whoami'
-//                sh 'tar -zcf binaries.tar.gz build/classes/passvault'
-  //              sh 'shasum -a 256 binaries.tar.gz > binaries_hash.txt'
-    //            sh 'rm binaries.tar.gz'
+                sh 'tar -zcf binaries.tar.gz build/classes/passvault'
+                sh 'shasum -a 256 binaries.tar.gz > binaries.hash'
+                sh 'rm binaries.tar.gz'
+                echo 'Hash of binary files:'
+                sh 'cat binaries.hash'
             }
         }
      
