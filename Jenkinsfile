@@ -59,7 +59,7 @@
             steps {
                 echo '*** Checking dependencies...'
                 dependencyCheck additionalArguments: ''' 
-                    -o build/classes/passvault 
+                    -o .
                     -s src/passvault 
                     -f ALL 
                     --prettyPrint''', odcInstallation: 'SCA: Dependency-Check'
