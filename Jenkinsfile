@@ -32,7 +32,7 @@ pipeline {
                 sh 'rm binaries.tar.gz'
                 echo 'Hash of binary files:'
                 sh 'cat binaries.hash'
-                echo 'Still need to compare with independent hash!"
+                echo 'Still need to compare with independent hash!'
                 echo 'We\'ll leave that for a homework assignment. :)'
             }
         }
