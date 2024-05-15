@@ -14,6 +14,7 @@
 //                git 'https://github.com/xenloops/password-vault'
 //            }
 //        }
+     
         stage('Build') {
             steps {
                 echo '*** Building the project...'
@@ -31,8 +32,14 @@
                     sh 'echo "Username: $USERNAME"'
                     sh 'echo "Password: $PASSWORD"'
                 }
+                echo '*** Generating hash ***'
+                sh 'ls -l'
+                sh 'cd ..'
+                echo 'One dir up'
+                sh 'ls -l'
             }
         }
+     
         stage('SBOM') {
             steps {
                 echo '*** Generating SBOM ***'
