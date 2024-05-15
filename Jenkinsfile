@@ -33,10 +33,7 @@
                     sh 'echo "Password: $PASSWORD"'
                 }
                 echo '*** Generating hash ***'
-                sh 'ls -l'
-                sh 'cd ..'
-                echo 'One dir up'
-                sh 'ls -l'
+                sh 'tar -zcf binaries.tar.gz build/classes/passvault'
             }
         }
      
