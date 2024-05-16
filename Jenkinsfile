@@ -54,6 +54,9 @@ pipeline {
                 echo '*** Generating SBOM ***'
                 sh 'echo CycloneDX cdxgen version: `cdxgen --version`'
                 sh 'cdxgen -o password-vault-bom.json'
+                echo '*** Checking SBOM ***'
+                sh 'cyclonedx analyze --input-file password-vault-bom.json'
+                echo '*** Should really also sign the SBOM ***'
             }
         }
         stage ('SCA') {
