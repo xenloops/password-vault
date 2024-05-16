@@ -2,6 +2,16 @@ pipeline {
     agent any
 
     stages {
+        stage('Precheck') {
+            steps {
+                echo '*** Preliminary steps ***'
+                echo 'Checking tool versions does two things:'
+                echo ' * Documents versions used for this run'
+                echo ' * Shows that the tools are installed and work'
+                sh 'echo Jenkins version: `jenkins --version`' 
+            }
+        }
+        
         // did this in Jenkins
 //        stage('Clone') {
 //            steps {
@@ -11,7 +21,8 @@ pipeline {
      
         stage('Build') {
             steps {
-                echo '*** Building the project...'
+                echo '*** Building the project ***'
+                sh 'echo ant version: `ant --version`' 
                 sh 'ant compile jar'  //works
                 //sh 'ant clean compile'
                 // Super secret service account creds:
@@ -28,6 +39,7 @@ pipeline {
                 }
                 echo '*** Generating hash ***'
                 sh 'tar -zcf binaries.tar.gz build/classes/passvault'
+                sh 'echo shasum version: `shasum --version`' 
                 sh 'shasum -a 256 binaries.tar.gz > binaries.hash'
                 sh 'rm binaries.tar.gz'
                 echo 'Hash of binary files:'
@@ -40,23 +52,13 @@ pipeline {
         stage('SBOM') {
             steps {
                 echo '*** Generating SBOM ***'
-                echo '(At least it will when this is working)'
                 sh 'echo CycloneDX cdxgen version: `cdxgen --version`'
-                sh 'cdxgen -o bom.json'
-                //sh 'cyclonedx generate-bom --output password-vault-SBOM.xml'
-                //sh 'cdxgen bom --build-dir build --output-file password-vault-SBOM.xml'
-                //sh 'mvn org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom'
-                //sh 'pwd'
-                //sh 'ls -l'
-//                script {
-                    //def cycloneDxHome = tool 'CycloneDX'
-                    //sh "${cycloneDxHome}/cyclonedx-cli generate-bom --output bom.xml"
-//                }
+                sh 'cdxgen -o password-vault-bom.json'
             }
         }
         stage ('SCA') {
             steps {
-                echo '*** Checking dependencies...'
+                echo '*** Checking dependencies ***'
                 dependencyCheck additionalArguments: ''' 
                     -o .
                     -s src/passvault 
