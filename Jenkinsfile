@@ -1,7 +1,7 @@
-sh 'set +x'
 pipeline {
     agent any
 
+    sh 'set +x'
     stages {
         stage('Precheck') {
             steps {
