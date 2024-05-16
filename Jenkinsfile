@@ -22,7 +22,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo '*** Building the project ***'
-                sh 'echo ant version: `ant --version`' 
+                sh 'echo ant version: `ant -version`' 
                 sh 'ant compile jar'  //works
                 //sh 'ant clean compile'
                 // Super secret service account creds:
