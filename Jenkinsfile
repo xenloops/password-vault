@@ -1,3 +1,4 @@
+sh 'set +x'
 pipeline {
     agent any
 
