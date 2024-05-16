@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Precheck') {
             steps {
-                sh 'set +x'
+                sh 'set +x'   // suppress command echo
                 echo '*** Preliminary steps ***'
                 echo 'Checking tool versions does two things:'
                 echo ' * Documents versions used for this run'
@@ -22,6 +22,7 @@ pipeline {
      
         stage('Build') {
             steps {
+                sh 'set +x'   // suppress command echo
                 echo '*** Building the project ***'
                 sh 'echo ant version: `ant -version`' 
                 sh 'ant compile jar'  //works
@@ -52,6 +53,7 @@ pipeline {
      
         stage('SBOM') {
             steps {
+                sh 'set +x'   // suppress command echo
                 echo '*** Generating SBOM ***'
                 sh 'echo CycloneDX cdxgen version: `cdxgen --version`'
                 sh 'cdxgen -o password-vault-bom.json'
@@ -59,6 +61,7 @@ pipeline {
         }
         stage ('SCA') {
             steps {
+                sh 'set +x'   // suppress command echo
                 echo '*** Checking dependencies ***'
                 dependencyCheck additionalArguments: ''' 
                     -o .
@@ -74,6 +77,7 @@ pipeline {
                 PROJECT_KEY = 'password-vault'
             }
             steps {
+                sh 'set +x'   // suppress command echo
                 echo '*** Scanning the code...'
                 // test command here
                 withSonarQubeEnv('SonarQube server') {
