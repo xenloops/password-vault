@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Precheck') {
             steps {
-                #!/bin/bash +x
+                sh '#!/bin/bash +x'
                 echo '*** Preliminary steps ***'
                 echo 'Checking tool versions does two things:'
                 echo ' * Documents versions used for this run'
